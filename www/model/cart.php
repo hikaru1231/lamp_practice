@@ -50,7 +50,7 @@ function get_user_cart($db, $user_id, $item_id){
       items.item_id = :item_id
   ";
 
-  return fetch_query($db, $sql, array(':uer_id' => $user_id), array(':item_id' => $item_id));
+  return fetch_query($db, $sql, array(':uer_id' => $user_id,':item_id' => $item_id));
 
 }
 
@@ -70,10 +70,10 @@ function insert_cart($db, $item_id, $user_id, $amount = 1){
         user_id,
         amount
       )
-    VALUES( item_id, user_id, amount)
+    VALUES( :item_id, :user_id, :amount)
   ";
 
-  return execute_query($db, $sql, array(':item_id' => $item_id), array(':user_id' => $user_id), array(':amount' => $amount));
+  return execute_query($db, $sql, array(':item_id' => $item_id, ':user_id' => $user_id, ':amount' => $amount));
 }
 
 function update_cart_amount($db, $cart_id, $amount){
@@ -83,10 +83,10 @@ function update_cart_amount($db, $cart_id, $amount){
     SET
       amount = amount
     WHERE
-      cart_id = cart_id
+      cart_id = :cart_id
     LIMIT 1
   ";
-  return execute_query($db, $sql, array(':amount' => $amount), array(':cart_id' => $cart_id));
+  return execute_query($db, $sql, array(':amount' => $amount, ':cart_id' => $cart_id));
 }
 
 function delete_cart($db, $cart_id){
@@ -94,7 +94,7 @@ function delete_cart($db, $cart_id){
     DELETE FROM
       carts
     WHERE
-      cart_id = cart_id
+      cart_id = :cart_id
     LIMIT 1
   ";
 
@@ -123,7 +123,7 @@ function delete_user_carts($db, $user_id){
     DELETE FROM
       carts
     WHERE
-      user_id = user_id
+      user_id = :user_id
   ";
 
   execute_query($db, $sql, array(':uer_id' => $uer_id));
