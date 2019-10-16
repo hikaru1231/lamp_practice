@@ -142,7 +142,7 @@ function h ($string){
 // トークンの生成
 function get_csrf_token(){
   // random_string()はユーザー定義関数。
-  $token = random_string(48);
+  $token = get_random_string(48);
   // set_session()はユーザー定義関数。
   set_session('csrf_token', $token);
   return $token;

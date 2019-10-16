@@ -26,3 +26,8 @@ if ($user['type'] === USER_TYPE_ADMIN){
   redirect_to(ADMIN_URL);
 }
 redirect_to(HOME_URL);
+
+$token = get_post('token');
+if(is_valid_csrf_token($token) === false) {
+  die('不正なアクセスです');
+}
