@@ -23,7 +23,7 @@ function get_user_carts($db, $user_id){
     WHERE
       carts.user_id = :user_id
   ";
-  return fetch_all_query($db, $sql, array(':usr_id' => $user_id));
+  return fetch_all_query($db, $sql, array(':user_id' => $user_id));
 }
 
 function get_user_cart($db, $user_id, $item_id){
@@ -50,7 +50,7 @@ function get_user_cart($db, $user_id, $item_id){
       items.item_id = :item_id
   ";
 
-  return fetch_query($db, $sql, array(':uer_id' => $user_id,':item_id' => $item_id));
+  return fetch_query($db, $sql, array(':user_id' => $user_id,':item_id' => $item_id));
 
 }
 
@@ -81,7 +81,7 @@ function update_cart_amount($db, $cart_id, $amount){
     UPDATE
       carts
     SET
-      amount = amount
+      amount = :amount
     WHERE
       cart_id = :cart_id
     LIMIT 1
@@ -126,7 +126,7 @@ function delete_user_carts($db, $user_id){
       user_id = :user_id
   ";
 
-  execute_query($db, $sql, array(':uer_id' => $uer_id));
+  execute_query($db, $sql, array(':user_id' => $uer_id));
 }
 
 
