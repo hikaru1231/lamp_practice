@@ -1,6 +1,8 @@
 <?php 
 require_once 'functions.php';
 require_once 'db.php';
+require_once 'purchase_details.php';
+require_once 'purchase_histories.php';
 
 function get_user_carts($db, $user_id){
   $sql = "
@@ -105,6 +107,8 @@ function purchase_carts($db, $carts){
   if(validate_cart_purchase($carts) === false){
     return false;
   }
+  insert_histories($db, $carts[0]['user_id']);
+  $history_id = $db->lastInsertId('history_id');
   foreach($carts as $cart){
     if(update_item_stock(
         $db, 
@@ -112,10 +116,12 @@ function purchase_carts($db, $carts){
         $cart['stock'] - $cart['amount']
       ) === false){
       set_error($cart['name'] . 'の購入に失敗しました。');
+    } else {
+      insert_detail($db, $cart['item_id'], $history_id, $cart['price'], $cart['stock']);
     }
   }
-  
   delete_user_carts($db, $carts[0]['user_id']);
+  
 }
 
 function delete_user_carts($db, $user_id){
