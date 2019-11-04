@@ -117,7 +117,7 @@ function purchase_carts($db, $carts){
       ) === false){
       set_error($cart['name'] . 'の購入に失敗しました。');
     } else {
-      insert_detail($db, $cart['item_id'], $history_id, $cart['price'], $cart['stock']);
+      insert_detail($db, $cart['item_id'], $history_id, $cart['price'], $cart['amount']);
     }
   }
   delete_user_carts($db, $carts[0]['user_id']);
