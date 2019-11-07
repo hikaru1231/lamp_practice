@@ -38,6 +38,13 @@ function get_items($db, $is_open = false){
     $sql .= '
       WHERE status = 1
     ';
+    if($search_stock = "new") {
+      $sql = $sql . ' ORDER BY items.created DESC';
+    } else if($search_price = "low") {
+      $sql = $sql . ' ORDER BY items.price DESC';
+    } else if($search_price = "high") {
+      $sql = $sql . ' ORDER BY items.stock ASC';
+    }
   }
 
   return fetch_all_query($db, $sql);

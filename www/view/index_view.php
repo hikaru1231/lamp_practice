@@ -12,6 +12,14 @@
 
   <div class="container">
     <h1>商品一覧</h1>
+    <form method="GET" action="index.php">
+     <select name="stock">
+      <option value="new"<?php if($search_stock = "new"){ ?> selected<?php }?>>新着順</option>
+      <option value="low"<?php if($search_price = "low"){ ?> selected<?php }?>>安い順</option>
+      <option value="high"<?php if($search_price = "high"){ ?> selected<?php }?>>高い順</option>
+     </select>
+    <input type="submit" value="並び替え">
+    </form>
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
     <div class="card-deck">
