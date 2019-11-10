@@ -15,6 +15,8 @@ $user = get_login_user($db);
 
 $token = get_csrf_token();
 
-$items = get_open_items($db);
+$search_order = get_get('order');
+
+$items = get_open_items($db, $search_order);
 
 include_once '../view/index_view.php';
